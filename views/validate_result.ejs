@@ -1,0 +1,20 @@
+<html>
+    <head>
+    	<title>Isikukood valideerimine</title>
+        <meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+		<div class="container">
+    	<h2>Isikukoodi valideerimine</h2>
+        <p>
+	    Isik isikukoodiga <%- isikukood %> on <%- sex %> kes on sündinud <%- day_born %>. <%- month_born %> <%- year_born %> aastal.
+    	Ta sündis <%- birth_place %>, kus tema sünnituse järjekorranumber oli <%- race_place %>.
+	    Ta on <%- kontrollnum %> kontrollnumbriga isikukoodi omanik.
+    	Fun true/false facts: they were born on a leap year: <%- isleapyear %>.
+        </p>
+        <a href="/">Valideeri uus isikukood</a>
+	    </div>
+    </body>
+</html>
