@@ -9,13 +9,13 @@ const parseUrl = require('body-parser');
 let encodeUrl = parseUrl.urlencoded({ extended: true });
 
 app.get('/', (req, res) => {
-    res.render('validate_form');
+    res.render('page', {data : null});
 });
 
 const validId = require('./validate');
 
-app.post('/validate', encodeUrl, (req, res) => {
-    res.render('validate_result', validId.idInfo(req.body.id_code));
+app.post('/', encodeUrl, (req, res) => {
+    res.render('page', {data : validId.idInfo(req.body.id_code)});
 })
 
 app.listen(3000, () => {
