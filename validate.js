@@ -9,22 +9,19 @@ function idInfo(isikukood) {
     let month_born = "None";
     let year_born = "None";
     let isleapyear = false;
+    let leapyearmessage = "They were born on a leap year"
+    let notleapyearmessage = "They were not born on a leap year"
     let day_born = "None";
     let birth_place = "None";
     let race_place = "None";
     let kontrollnum = "None";
     let needcase2 = false;
+    let error = "none";
 
-    if (isikukood == "505090727501") {
-        console.log("Its a me Aimar")
-        console.log("Ignore the 1 at the end")
-        throw new Error("Sayonara");
-    }
-    else if (isikukood.length == 11) {
+    if (isikukood.length == 11) {
     }
     else {
-        console.log("Why give wrong social security number??")
-        process.exit();
+        error = "Social security number is not 11 digits long."
     }
 
 
@@ -43,8 +40,7 @@ function idInfo(isikukood) {
         century = "21"
     }
     else {
-        console.log("You so far from the future I dont even now what your pronouns are.")
-        process.exit()
+        error = "First digit of social security number is invalid."
     }
 
     if (sex % 2 == 0) {
@@ -92,8 +88,7 @@ function idInfo(isikukood) {
         month_born = "December";
     }
     else {
-        console.log("New month again????")
-        process.exit();
+        error = "Month of birth is invalid."
     }
 
 
@@ -102,8 +97,7 @@ function idInfo(isikukood) {
         year_born = century + year;
     }
     else {
-        console.log("Da fuck year is that??")
-        process.exit()
+        error = "Year of birth is invalid."
     } 
 
     if (year_born % 100 == 0) {
@@ -123,7 +117,7 @@ function idInfo(isikukood) {
 
 
     let day = isikukood.slice(5,7);
-    if ((day <= 29 && day > 0 && month_born == "February")){
+    if ((month_born == "February")){
         if ((day == 29 && isleapyear == true)) {
             day_born = 29;
         }
@@ -131,8 +125,7 @@ function idInfo(isikukood) {
             day_born = day;
         }
         else {
-            console.log("There aint a knew kind of leap year. At least to my knowledge");
-            process.exit()
+            error = "Not a leap year so your day of birth cant be the 29th of feb."
         }
     }
 
@@ -143,8 +136,7 @@ function idInfo(isikukood) {
         day_born = day  
     }
     else {
-        console.log("Its to late to think up new error codes.")
-        process.exit()
+        error = "Day of birth outside the range of days in month of birth."
     } 
 
 
@@ -211,8 +203,7 @@ function idInfo(isikukood) {
         race_place = location - 650
     }
     else {
-        console.log("I honestly dont know where you were born")
-        process.exit();
+        error = "Location of birth is invalid."
     }
 
     let sum = 0;
@@ -268,8 +259,7 @@ function idInfo(isikukood) {
     } 
 
     if (kontrollnum != isikukood.charAt(10)) {
-        console.log("Controll number at the end of social security number does not match the one from check.")
-        process.exit()
+        error = "Control number is invalid."
     }
 
     const resultinfo = {
@@ -282,7 +272,8 @@ function idInfo(isikukood) {
 		birth_place: birth_place,
 		race_place: race_place,
 		kontrollnum: kontrollnum,
-		isleapyear: isleapyear
+		leapyearmessage: isleapyear ? leapyearmessage : notleapyearmessage,
+        error: error
 	}
 
 	return resultinfo;

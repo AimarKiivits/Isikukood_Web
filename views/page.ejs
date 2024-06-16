@@ -1,4 +1,9 @@
 <%- include('header'); %>
+<% if(error !== "none") { %>
+    <div style="font-size: 30px; color: red;">
+        <%= error %>
+    </div>
+<% } %>
 <%- include('validate_form'); %>
 <% if(data !== null) { %>
     <%- include('validate_result', data); %>

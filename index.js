@@ -9,13 +9,22 @@ const parseUrl = require('body-parser');
 let encodeUrl = parseUrl.urlencoded({ extended: true });
 
 app.get('/', (req, res) => {
-    res.render('page', {data : null});
+    res.render('page', {data : null, error : 'none'});
 });
 
 const validId = require('./validate');
 
 app.post('/', encodeUrl, (req, res) => {
-    res.render('page', {data : validId.idInfo(req.body.id_code)});
+    if (req.body.id_code === "") {
+        res.render('page', {data : null, error : 'Input is empty.'});
+    } else {
+        let data = validId.idInfo(req.body.id_code);
+        let error = data.error;
+        if (error !== "none") {
+            data = null;
+        }
+        res.render('page', {data : data, error: error});
+    }
 })
 
 app.listen(3000, () => {
